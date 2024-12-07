@@ -13,10 +13,15 @@ function App() {
   }
 
   const validate = (values) =>{
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
     let errors = {};
     if(!values.username) errors.username = "Username is required";
     if(!values.email) errors.email = "Email is required";
+    if(!emailRegex.test(values.email)) errors.email = 'This is not a valid email'
     if(!values.password) errors.password = "Password is required";
+    else if(values.password?.length < 4) errors.password = 'Password must be more than 4 characters'
     return errors;
   }
 
@@ -31,7 +36,7 @@ function App() {
     < div className='container'>
       <pre>{JSON.stringify(formValues, null, 2)}</pre>
    
-      {formErrors.length === 0 && <div> Logged in succesfully</div> }
+      {Object.keys(formErrors).length === 0 && <div> Logged in succesfully</div> }
       <form className='form-container' onSubmit={handleSubmit}>
         <div className='mb-3 heading'>Login Form</div>
 
