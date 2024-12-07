@@ -19,7 +19,7 @@ function App() {
     let errors = {};
     if(!values.username) errors.username = "Username is required";
     if(!values.email) errors.email = "Email is required";
-    if(!emailRegex.test(values.email)) errors.email = 'This is not a valid email'
+    else if(values.email && !emailRegex.test(values.email)) errors.email = 'This is not a valid email'
     if(!values.password) errors.password = "Password is required";
     else if(values.password?.length < 4) errors.password = 'Password must be more than 4 characters'
     return errors;
