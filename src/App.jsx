@@ -6,6 +6,7 @@ function App() {
 
   const [formValues, setFormValues] = useState({ username: '', email: '', password: '' });
   const [formErrors, setformErrors] = useState({ username: '', email: '', password: '' });
+  const [submit, setSubmit] = useState(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,14 +30,16 @@ function App() {
     console.log('submited')
     e.preventDefault();
     const errors = validate(formValues)
-    setformErrors((prev)=>({...prev,...errors}));
+    setformErrors(errors);
   }
 
   return (
     < div className='container'>
-      <pre>{JSON.stringify(formValues, null, 2)}</pre>
-   
-      {Object.keys(formErrors).length === 0 && <div> Logged in succesfully</div> }
+      
+      {Object.keys(formErrors).length === 0 && submit ?  
+        <div className='success-msg'> Logged in succesfully</div> :
+         <pre>{JSON.stringify(formValues, null, 2)}</pre>
+      }
       <form className='form-container' onSubmit={handleSubmit}>
         <div className='mb-3 heading'>Login Form</div>
 
@@ -55,7 +58,7 @@ function App() {
 
         <div className="mb-5">
           <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" name="password" value={formValues.password} onChange={handleChange} />
+          <input type="password" className="form-control" name="password" placeholder="password" value={formValues.password} onChange={handleChange} />
           <ErrorMessage msg={formErrors.password}/>
         </div>
 

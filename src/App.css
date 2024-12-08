@@ -34,3 +34,12 @@
   color: red;
   margin: 1rem 0;
 }
+
+.success-msg{
+  background-color: rgb(209, 239, 208);
+  margin: 1rem auto;
+  border: 1px solid #5b5959;
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: max-content;
+}
